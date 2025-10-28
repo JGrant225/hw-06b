@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Updated Jan 21, 2018
+Updated Oct 27, 2025
 The primary goal of this file is to demonstrate a simple unittest implementation
 
 @author: jrr
@@ -85,7 +85,7 @@ class TestTriangles(unittest.TestCase):
         self.assertEqual(classifyTriangle(201,5,6),'InvalidInput')
 
     def testInvalidInputC(self):
-        self.assertEqual(classifyTriangle(5,100,6),'InvalidInput')
+        self.assertEqual(classifyTriangle(5,300,6),'InvalidInput')
 
     def testInvalidInputD(self):
         self.assertEqual(classifyTriangle(5,6,0),'InvalidInput')

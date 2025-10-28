@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Jan 14 13:44:00 2016
-Updated Jan 21, 2018
+Updated Oct 27, 2025
 
 The primary goal of this file is to demonstrate a simple python program to classify triangles
 
 @author: jrr
 @author: rk
+@author: jg
 """
 
 def classifyTriangle(a,b,c):
@@ -22,7 +23,7 @@ def classifyTriangle(a,b,c):
         If exactly one pair of sides are equal, return 'Isoceles'
         If no pair of  sides are equal, return 'Scalene'
         If not a valid triangle, then return 'NotATriangle'
-        If the sum of any two sides equals the squate of the third side, then return 'Right'
+        If the sum of any two sides equals the square of the third side, then return 'Right'
       
       BEWARE: there may be a bug or two in this code
     """
@@ -31,7 +32,8 @@ def classifyTriangle(a,b,c):
     if a > 200 or b > 200 or c > 200:
         return 'InvalidInput'
         
-    if a <= 0 or b <= b or c <= 0:
+    # Changed b <= b to b <= 0
+    if a <= 0 or b <= 0 or c <= 0:
         return 'InvalidInput'
     
     # verify that all 3 inputs are integers  
@@ -41,17 +43,25 @@ def classifyTriangle(a,b,c):
       
     # This information was not in the requirements spec but 
     # is important for correctness
-    # the sum of any two sides must be strictly less than the third side
+    # the sum of any two sides must be strictly greater than the third side
     # of the specified shape is not a triangle
-    if (a >= (b - c)) or (b >= (a - c)) or (c >= (a + b)):
+    # Changed to correct triangle inequality (sum >= third side means NotATriangle)
+    if (a >= (b + c)) or (b >= (a + c)) or (c >= (a + b)):
         return 'NotATriangle'
         
     # now we know that we have a valid triangle 
-    if a == b and b == a:
+    # Changed b == a to b == c to properly check all three sides are equal
+    if a == b and b == c:
         return 'Equilateral'
-    elif ((a * 2) + (b * 2)) == (c * 2):
+    # Changed to proper Pythagorean theorem (a² + b² = c²) and check all permutations
+    elif ((a ** 2) + (b ** 2)) == (c ** 2):
         return 'Right'
-    elif (a != b) and  (b != c) and (a != b):
+    elif ((a ** 2) + (c ** 2)) == (b ** 2):
+        return 'Right'
+    elif ((b ** 2) + (c ** 2)) == (a ** 2):
+        return 'Right'
+    # Changed second (a != b) to (a != c) to properly check all sides are different
+    elif (a != b) and (b != c) and (a != c):
         return 'Scalene'
     else:
-        return 'Isoceles'
+        return 'Isosceles'
